@@ -24,6 +24,18 @@ pub enum SuprascalarError {
     #[error("Unsupported architecture: {0}")]
     UnsupportedArchitecture(String),
 
+    #[error("Command blocked by safety policy: {command}. Reason: {reason}")]
+    CommandBlocked { command: String, reason: String },
+
+    #[error("Invalid tool input: {0}")]
+    InvalidToolInput(String),
+
+    #[error("Terminal state error: {0}")]
+    TerminalState(String),
+
+    #[error("Missing environment variable: {0}")]
+    MissingEnvVar(String),
+
     // Tokenizer error wrapper
     #[error("Tokenization error: {0}")]
     Tokenizer(String),
