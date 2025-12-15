@@ -4,6 +4,7 @@ use crate::error::Result;
 use serde_json::Value;
 
 // 서브 모듈(구현체) 등록
+pub mod docker;
 pub mod ls;
 pub mod terminal;
 

@@ -26,7 +26,9 @@ fn main() -> Result<(), SuprascalarError> {
         backend,
         "You are Suprascalar, an intelligent and helpful AI assistant running locally.",
     );
-    agent.register_tool(suprascalar::tools::terminal::TerminalSession::new());
+    // agent.register_tool(suprascalar::tools::terminal::TerminalSession::new());
+    let docker_tool = suprascalar::tools::docker::DockerShell::new()?;
+    agent.register_tool(docker_tool);
 
     println!(">>> Suprascalar is ready! (Type '/exit' or 'quit' to stop)");
     println!("------------------------------------------------------------");
