@@ -2263,6 +2263,7 @@ dependencies = [
  "hf-hub",
  "petgraph",
  "rand",
+ "regex",
  "serde",
  "serde_json",
  "thiserror 2.0.17",
