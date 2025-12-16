@@ -29,6 +29,7 @@ fn main() -> Result<(), SuprascalarError> {
     // agent.register_tool(suprascalar::tools::terminal::TerminalSession::new());
     let docker_tool = suprascalar::tools::docker::DockerShell::new()?;
     agent.register_tool(docker_tool);
+    agent.register_tool(suprascalar::tools::file_io::FileIO::new());
 
     println!(">>> Suprascalar is ready! (Type '/exit' or 'quit' to stop)");
     println!("------------------------------------------------------------");
