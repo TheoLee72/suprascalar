@@ -124,6 +124,9 @@ impl Agent {
                 content: response_text.clone(),
             });
 
+            //임시 println
+            println!("{}", response_text.clone());
+
             // 4. 도구 호출 감지 (JSON 파싱)
             // ```json { ... } ``` 패턴을 찾습니다.
             if let Some(tool_call) = self.extract_tool_call(&response_text) {
