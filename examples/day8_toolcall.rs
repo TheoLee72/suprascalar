@@ -21,12 +21,13 @@ fn main() -> Result<(), SuprascalarError> {
 
     // 3. 에이전트 생성
     // Agent 내부의 'history' 벡터가 대화 내용을 저장합니다.
-    let mut agent = Agent::new(
+    let mut agent = Agent::builder(
         "Suprascalar",
         backend,
         "You are Suprascalar, an intelligent and helpful AI assistant running locally.",
-    );
-    agent.register_tool(suprascalar::tools::ls::ListDirectory::new());
+    )
+    .with_tool(suprascalar::tools::ls::ListDirectory::new())
+    .build()?;
 
     println!(">>> Suprascalar is ready! (Type '/exit' or 'quit' to stop)");
     println!("------------------------------------------------------------");

@@ -1,5 +1,5 @@
 use std::io::{self, Write};
-use suprascalar::{Agent, CandleQwen, SuprascalarError};
+use suprascalar::{CandleQwen, SuprascalarError, agents::qwen_agent::Agent};
 
 fn main() -> Result<(), SuprascalarError> {
     // 1. 모델 설정 (day6_simple_agent와 동일)
@@ -21,15 +21,15 @@ fn main() -> Result<(), SuprascalarError> {
 
     // 3. 에이전트 생성
     // Agent 내부의 'history' 벡터가 대화 내용을 저장합니다.
-    let mut agent = Agent::new(
+    let docker_tool = suprascalar::tools::docker::DockerShell::new()?;
+    let mut agent = Agent::builder(
         "Suprascalar",
         backend,
         "You are Suprascalar, an intelligent and helpful AI assistant running locally.",
-    );
-    // agent.register_tool(suprascalar::tools::terminal::TerminalSession::new());
-    let docker_tool = suprascalar::tools::docker::DockerShell::new()?;
-    agent.register_tool(docker_tool);
-    agent.register_tool(suprascalar::tools::file_io::FileIO::new());
+    )
+    .with_tool(suprascalar::tools::file_io::FileIO::new())
+    .with_tool(docker_tool)
+    .build()?;
 
     println!(">>> Suprascalar is ready! (Type '/exit' or 'quit' to stop)");
     println!("------------------------------------------------------------");

@@ -19,7 +19,8 @@ fn main() -> Result<(), SuprascalarError> {
     };
 
     // 3. Create Agent
-    let mut agent = Agent::new("Suprascalar", backend, "You are a helpful AI assistant.");
+    let mut agent =
+        Agent::builder("Suprascalar", backend, "You are a helpful AI assistant.").build()?;
 
     // 4. Chat
     match agent.chat("Hello! /no_think") {
