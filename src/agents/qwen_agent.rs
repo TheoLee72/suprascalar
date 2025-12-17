@@ -267,6 +267,8 @@ impl Agent {
 
             let prompt = self.build_prompt()?;
             let response_text = self.model.generate(&prompt)?;
+            //log
+            println!("{}", response_text);
 
             // 모델 응답을 우선 기록(원본 텍스트)
             let assistant_raw = Message::assistant_text(response_text.clone());
